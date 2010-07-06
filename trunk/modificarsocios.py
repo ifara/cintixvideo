@@ -57,18 +57,16 @@ class Modificarsocio(wx.Frame):
         event.Skip()
 
     def OnAceptar(self, event): # wxGlade: Modificarsocio.<event_handler>
-        pelicula = self.text_socio.GetValue()
+        self.text_socio.GetValue()
         self.text_socio.SetValue('')
         c = self.db.cursor()
-        c = self.db.cursor()
-        c.execute('''SELECT ID_socios, Nombre, Apellido FROM socios WHERE Apellido = %s''', (socio))
+        c.execute('''SELECT id_socios, Nombre, Apellido FROM Socios WHERE id_socios= %s''',(socio))
         q = c.fetchall()
+        print q 
         c.close()
-        print q
         lista = []
-        for elemento in q:
-            lista.append(str(elemento[0]) + ' - ' + elemento[1] + ' ' + elemento[2])
-        print lista
+        for cosa 
+        
 
 # end of class Modificarsocio
 
