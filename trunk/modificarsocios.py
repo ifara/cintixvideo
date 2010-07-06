@@ -65,7 +65,8 @@ class Modificarsocio(wx.Frame):
         print q 
         c.close()
         lista = []
-        for cosa 
+        for cosa in q :
+            cosa.append(str(cosa[0], cosa[1],)
         
 
 # end of class Modificarsocio
