@@ -103,11 +103,11 @@ class Prestamos(wx.Frame):
        retiro = self.fecha_retiro.GetValue()
        retiro = ('%04d /%02d/ %02d '% (retiro.GetYear(),retiro.GetMonth()+1,retiro.GetDay()))
                                            
-       reintegro = self.fecha_reitegro.GetValue()
-       reitegro =('%04d /%02d/ %02d '% (retiro.GetYear(),retiro.GetMonth()+1,retiro.GetDay()))
+       reitegro = self.fecha_reitegro.GetValue()
+       reitegro =('%04d /%02d/ %02d '% (reitegro.GetYear(),reitegro.GetMonth()+1,reitegro.GetDay()))
                                        
-       c = self.cursor()
-       c.execute ('''INSERT INTO Prestamos (Dia_retiro,Dia_reitegro,id_film,id_socios') VALUES ('%s, %s, %s , %s')''',(Dia_retiro,Dia_reitegro,video,gente))
+       c = self.db.cursor()
+       c.execute ('''INSERT INTO Prestamos (fecha_retiro,fecha_reitegro,id_film,id_socios') VALUES ('%s, %s, %s , %s')''',(fecha_retiro,fecha_reitegro,video,gente))
        c.close() 
          
        wx.MessageBox('El alquiler se ha hecho correctame',u'OK',
