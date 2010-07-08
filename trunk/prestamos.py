@@ -14,17 +14,13 @@ class Prestamos(wx.Frame):
     def __init__(self, *args, **kwds):
         self.db = MySQLdb.connect('localhost', 'cintia', 'cintia', 'cintia', charset='UTF8')
         c = self.db.cursor()
-        c.execute('''select * from Videoclub''')
+        c.execute('''SELECT id_socios, Apellido, Nombres FROM Socios''')
         q = c.fetchall()
-        for Videoclub in q :
-            peli.append(Videoclub[1])
-        
-        c.execute('''select * from Socios''') 
-        q = c.fetchall()
-        for Socios in q :
-            clientes.append(Socios[1]) 
-            
-        c.close()  
+        a = []
+        for persona in q:
+            a.append(str(persona[0])+'-'+persona[2]+'-'+persona[1])
+       
+        c.close()
             
         # begin wxGlade: Prestamos.__init__
         kwds["style"] = wx.DEFAULT_FRAME_STYLE
@@ -33,7 +29,18 @@ class Prestamos(wx.Frame):
         self.socio_ = wx.StaticText(self.panel_1, -1, "Socios : ")
         self.text_socios = wx.TextCtrl(self.panel_1, -1, "")
         self.pelicula_ = wx.StaticText(self.panel_1, -1, "Pelicula : ")
+        c = self.db.cursor()
+        c.execute('''SELECT id_film,pelicula FROM Videoclub''')
+        q = c.fetchall()
+        film = []
+        for video in q :
+            film.append(str(video[0])+'-'+video[1])
+        c.close()
+            
         self.combo_peli = wx.ComboBox(self.panel_1, -1, choices=["Terror ", "Romantica", "Drama", "Ficcion", "Infantil", "Comedia"], style=wx.CB_DROPDOWN|wx.CB_READONLY)
+        
+        
+        
         self.label_retiro = wx.StaticText(self.panel_1, -1, "Dia retiro :")
         self.fecha_retiro = wx.DatePickerCtrl(self.panel_1, -1)
         self.reitegro_ = wx.StaticText(self.panel_1, -1, "Dia reitegro:")
@@ -75,7 +82,39 @@ class Prestamos(wx.Frame):
         # end wxGlade
 
     def OnIngresar(self, event): # wxGlade: Prestamos.<event_handler>
-       self.Close()
+       socios = self.text_socios.GetValue()
+       clientes.append(socios)
+       
+       for personas in clientes :
+           a = personas.strip()
+           ordenar = a.split('-')
+           gente = str(ordenar[0])
+           print gente
+        
+       titulo = self.combo_peli.GetValue()
+       peli.append(titulo) 
+       
+       for algo in peli :
+           a = algo.strip()
+           ordenar = a.split('-')
+           video = str(ordenar[0])
+           print video 
+           
+       retiro = self.fecha_retiro.GetValue()
+       retiro = ('%04d /%02d/ %02d '% (retiro.GetYear(),retiro.GetMonth()+1,retiro.GetDay()))
+                                           
+       reintegro = self.fecha_reitegro.GetValue()
+       reitegro =('%04d /%02d/ %02d '% (retiro.GetYear(),retiro.GetMonth()+1,retiro.GetDay()))
+                                       
+       c = self.cursor()
+       c.execute ('''INSERT INTO Prestamos (Dia_retiro,Dia_reitegro,id_film,id_socios') VALUES ('%s, %s, %s , %s')''',(Dia_retiro,Dia_reitegro,video,gente))
+       c.close() 
+         
+       wx.MessageBox('El alquiler se ha hecho correctame',u'OK',
+       wx.OK | wx.ICON_INFORMATION, None)
+         
+       self.Close()                               
+              
 # end of class Prestamos
 
 

@@ -53,26 +53,36 @@ class Modificarsocio(wx.Frame):
         # end wxGlade
 
     def OnCancelar(self, event): # wxGlade: Modificarsocio.<event_handler>
-        print "Event handler `OnCancelar' not implemented!"
-        event.Skip()
+      self.close() 
 
     def OnAceptar(self, event): # wxGlade: Modificarsocio.<event_handler>
         self.text_socio.GetValue()
         self.text_socio.SetValue('')
         c = self.db.cursor()
-        c.execute('''SELECT id_socios, Nombre, Apellido FROM Socios WHERE id_socios= %s''',(socio))
+        c.execute('''SELECT id_socios, Nombre, Apellido FROM Socios WHERE Apellidos= %s''',(socio))
         q = c.fetchall()
         print q 
         c.close()
         lista = []
-        for cosa in q :
-            cosa.append(str(cosa[0], cosa[1],)
+        for elemento in q:
+            elemento.append(str(elemento[0]+' - ' + elemento[1]+ ' - ' + elemento[2])
+        print lista 
+        dlg = wx.SingleChoiceDialog(None, 'Los apellidos que cumplen con su busqueda son:' ,'Modificacion', lista, wx.CHOICEDLG_STYLE)
+         
+        if dlg.ShowModal() == wx.ID_OK:
+            self.log.WriteText('You selected: %s\n' % dlg.GetStringSelection())
+
+        dlg.Destroy()
+        
+            
+            
+       
         
 
 # end of class Modificarsocio
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" :
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()
     Modificar = Modificarsocio(None, -1, "")
