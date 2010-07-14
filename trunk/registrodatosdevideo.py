@@ -75,52 +75,59 @@ class MyRegistro(wx.Frame):
         # end wxGlade
 
     def OnAltapeli(self, event): # wxGlade: MyRegistro.<event_handler>
-        pass
+        import  registropeli  
+        ventana = registropeli.Pelicula(None, -1, u"Registro de Pelicula")
+        ventana.CenterOnScreen()
+        ventana.Show()
+        return True
 
     def OnAltasocio(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnAltasocio' not implemented!"
-        event.Skip()
+        import  sociodelclub  
+        ventana1 = sociodelclub.Socios(None, -1, u"Registro de Socios")
+        ventana1.CenterOnScreen()
+        ventana1.Show()
+        return True
 
     def OnAltaalquiler(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnAltaalquiler' not implemented!"
-        event.Skip()
+        import  prestamos  
+        ventana2 = prestamos.Prestamos(None, -1, u"Registro de Alquiler")
+        ventana2.CenterOnScreen()
+        ventana2.Show()
+        return True
 
     def OnModipelic(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnModipelic' not implemented!"
-        event.Skip()
+        import  modificarpely  
+        ventana3 = modificarpely.Modificar(None, -1, u"Modificacion de Pelicula")
+        ventana3.CenterOnScreen()
+        ventana3.Show()
+        return True
 
     def OnModisocios(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnModisocios' not implemented!"
-        event.Skip()
+        import  modificarsocios 
+        ventana = modificarsocios.Modificarsocio(None, -1, u"Modificacion de Socios")
+        ventana.CenterOnScreen()
+        ventana.Show()
+        return True
 
     def OnModialquiler(self, event): # wxGlade: MyRegistro.<event_handler>
         print "Event handler `OnModialquiler' not implemented!"
         event.Skip()
 
     def OnBajapeli(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnBajapeli' not implemented!"
-        event.Skip()
+        pass
 
     def OnBajassocios(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnBajassocios' not implemented!"
-        event.Skip()
+        pass
 
     def OnBajasalquiler(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnBajasalquiler' not implemented!"
-        event.Skip()
+        pass
 
     def OnListapeli(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnListapeli' not implemented!"
-        event.Skip()
-
+        pass
     def OnListasocios(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnListasocios' not implemented!"
-        event.Skip()
-
+        pass
     def OnListaalquiler(self, event): # wxGlade: MyRegistro.<event_handler>
-        print "Event handler `OnListaalquiler' not implemented!"
-        event.Skip()
-
+        pass
 # end of class MyRegistro
 
 

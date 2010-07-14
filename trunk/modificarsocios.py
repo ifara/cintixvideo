@@ -8,13 +8,12 @@ import MySQLdb
 # end wxGlade
 
 
-
 class Modificarsocio(wx.Frame):
     def __init__(self, *args, **kwds):
         # begin wxGlade: Modificarsocio.__init__
         kwds["style"] = wx.DEFAULT_FRAME_STYLE
-        self.db = MySQLdb.connect('localhost', 'cintia', 'cintia', 'cintia', charset='UTF8')
         wx.Frame.__init__(self, *args, **kwds)
+        self.db = MySQLdb.connect('localhost', 'cintia', 'cintia', 'cintia', charset='UTF8')
         self.frase2 = wx.StaticText(self, -1, "Ingrese el socio a Modificar")
         self.static_line_1 = wx.StaticLine(self, -1)
         self.socio_ = wx.StaticText(self, -1, "Socio :")
@@ -53,24 +52,40 @@ class Modificarsocio(wx.Frame):
         # end wxGlade
 
     def OnCancelar(self, event): # wxGlade: Modificarsocio.<event_handler>
-      self.close() 
+      self.Close() 
 
     def OnAceptar(self, event): # wxGlade: Modificarsocio.<event_handler>
-        self.text_socio.GetValue()
-        self.text_socio.SetValue('')
+        socio = self.text_socio.GetValue()
+        
         c = self.db.cursor()
-        c.execute('''SELECT id_socios, Nombre, Apellido FROM Socios WHERE Apellidos= %s''',(socio))
+        c.execute('''SELECT id_socios, Nombres, Apellido FROM Socios WHERE Apellido= %s''',(socio))
         q = c.fetchall()
-        print q 
         c.close()
+        print q
         lista = []
         for elemento in q:
-            elemento.append(str(elemento[0]+' - ' + elemento[1]+ ' - ' + elemento[2])
+            lista.append(str(elemento[0])+' - ' + elemento[1]+ ' - ' + elemento[2])
         print lista 
-        dlg = wx.SingleChoiceDialog(None, 'Los apellidos que cumplen con su busqueda son:' ,'Modificacion', lista, wx.CHOICEDLG_STYLE)
+        dlg = wx.SingleChoiceDialog(None, 'Los apellidos que cumplen con su criterio son:' ,'Modificacion de Socios',lista, wx.CHOICEDLG_STYLE)
          
         if dlg.ShowModal() == wx.ID_OK:
-            self.log.WriteText('You selected: %s\n' % dlg.GetStringSelection())
+            print 'You selected: %s\n' % dlg.GetStringSelection()
+        amodificar = dlg.GetStringSelection()
+        id = amodificar.strip()
+        id = id.split("-")
+        id = id [0]
+        id = int(id)
+        print id
+        dlg.Destroy()
+        import modificaciondesocios
+        ventana = modificaciondesocios.Socios( id, None, -1, u"Modificación de socios")
+        ventana.CenterOnScreen()
+        ventana.Show()
+        
+        self.Close()    
+
+       
+    
 
         dlg.Destroy()
         

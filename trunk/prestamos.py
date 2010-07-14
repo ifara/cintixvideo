@@ -34,7 +34,7 @@ class Prestamos(wx.Frame):
         q = c.fetchall()
         film = []
         for video in q :
-            film.append(str(video[0])+'-'+video[1])
+            film.append(str(video[0]) + '-' + video[1])
         c.close()
             
         self.combo_peli = wx.ComboBox(self.panel_1, -1, choices=["Terror ", "Romantica", "Drama", "Ficcion", "Infantil", "Comedia"], style=wx.CB_DROPDOWN|wx.CB_READONLY)
@@ -87,8 +87,8 @@ class Prestamos(wx.Frame):
        
        for personas in clientes :
            a = personas.strip()
+           gente = str(a[0])
            ordenar = a.split('-')
-           gente = str(ordenar[0])
            print gente
         
        titulo = self.combo_peli.GetValue()
@@ -98,19 +98,17 @@ class Prestamos(wx.Frame):
            a = algo.strip()
            ordenar = a.split('-')
            video = str(ordenar[0])
-           print video 
-           
+       print video 
        retiro = self.fecha_retiro.GetValue()
-       retiro = ('%04d /%02d/ %02d '% (retiro.GetYear(),retiro.GetMonth()+1,retiro.GetDay()))
-                                           
+       retiro = ('%04d/%02d/%02d '% (retiro.GetYear(),retiro.GetMonth()+1,retiro.GetDay()))
        reitegro = self.fecha_reitegro.GetValue()
-       reitegro =('%04d /%02d/ %02d '% (reitegro.GetYear(),reitegro.GetMonth()+1,reitegro.GetDay()))
-                                       
+       reitegro =('%04d/%02d/%02d '% (reitegro.GetYear(),reitegro.GetMonth()+1,reitegro.GetDay()))
        c = self.db.cursor()
-       c.execute ('''INSERT INTO Prestamos (fecha_retiro,fecha_reitegro,id_film,id_socios') VALUES ('%s, %s, %s , %s')''',(fecha_retiro,fecha_reitegro,video,gente))
+       print retiro, reitegro
+       c.execute ('''INSERT INTO Prestamos (Dia_retiro, Dia_reitegro, id_film, id_socios) VALUES (%s, %s, %s , %s)''',(retiro, reitegro, video, gente))
        c.close() 
          
-       wx.MessageBox('El alquiler se ha hecho correctame',u'OK',
+       wx.MessageBox('El alquiler se ha hecho correctamente',u'OK',
        wx.OK | wx.ICON_INFORMATION, None)
          
        self.Close()                               
