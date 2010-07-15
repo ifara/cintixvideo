@@ -106,7 +106,10 @@ class Prestamos(wx.Frame):
        c = self.db.cursor()
        print retiro, reitegro
        c.execute ('''INSERT INTO Prestamos (Dia_retiro, Dia_reitegro, id_film, id_socios) VALUES (%s, %s, %s , %s)''',(retiro, reitegro, video, gente))
-       c.close() 
+       
+        
+    
+       
          
        wx.MessageBox('El alquiler se ha hecho correctamente',u'OK',
        wx.OK | wx.ICON_INFORMATION, None)
