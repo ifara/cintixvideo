@@ -19,7 +19,7 @@ class MyRegistro(wx.Frame):
         # Menu Bar
         self.menu_re = wx.MenuBar()
         wxglade_tmp_menu = wx.Menu()
-        alta = wxglade_tmp_menu.Append(wx.NewId(), "A&ltadePeliculas", "", wx.ITEM_NORMAL)
+        )
         wxglade_tmp_menu.Append(wx.NewId(), "A&ltadeSocios", "", wx.ITEM_NORMAL)
         wxglade_tmp_menu.Append(wx.NewId(), "A&ltadeAlquiler", "", wx.ITEM_NORMAL)
         self.menu_re.Append(wxglade_tmp_menu, "A&lta")
@@ -39,6 +39,7 @@ class MyRegistro(wx.Frame):
         wxglade_tmp_menu.Append(wx.NewId(), "L&IistadodeAlquiler", "", wx.ITEM_NORMAL)
         self.menu_re.Append(wxglade_tmp_menu, "L&istado")
         wxglade_tmp_menu = wx.Menu()
+        alta = wxglade_tmp_menu.Append(wx.NewId(), "A&ltadePeliculas", "", wx.ITEM_NORMAL
         self.menu_re.Append(wxglade_tmp_menu, "")
         self.SetMenuBar(self.menu_re)
         # Menu Bar end
