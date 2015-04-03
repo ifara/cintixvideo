@@ -1,0 +1,1 @@
+Es un profecto basado en python y wxphython,en ABM,echo en un programa de Base de Datos.
